@@ -16,7 +16,7 @@ class TagsViewController: UITableViewController {
     
     var selectedIndexPaths = [IndexPath]()
     
-    let tagDataSoure = TagDataSource()
+    let tagDataSource = TagDataSource()
     
     @IBAction func done(_ sender: UIBarButtonItem) {
         presentingViewController?.dismiss(animated: true, completion: nil)
@@ -71,14 +71,14 @@ class TagsViewController: UITableViewController {
             
             switch tagsResult {
             case let .success(tags):
-                self.tagDataSoure.tags = tags
+                self.tagDataSource.tags = tags
                 
-                guard let photoTag = self.photo.tags as? Set<Tag> else {
+                guard let photoTags = self.photo.tags as? Set<Tag> else {
                     return
                 }
                 
                 for tag in photoTags {
-                    if let index = self.tagDataSoure.tags.index(after: tag) {
+                    if let index = self.tagDataSource.tags.index(of: tag) {
                         let indexPath = IndexPath(row: index, section: 0)
                         self.selectedIndexPaths.append(indexPath)
                     }
@@ -93,7 +93,7 @@ class TagsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let tag = tagDataSoure.tags[indexPath.row]
+        let tag = tagDataSource.tags[indexPath.row]
         
         if let index = selectedIndexPaths.index(of: indexPath) {
             selectedIndexPaths.remove(at: index)

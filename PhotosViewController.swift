@@ -15,6 +15,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
     
+    //kicks off the web service exchange when the view controller comes onscreen for the first time
     override func viewDidLoad() {
         super.viewDidLoad()
         

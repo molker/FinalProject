@@ -4,20 +4,24 @@
 //
 //  Created by Matthew Olker on 4/19/17.
 //  Copyright © 2017 Matthew Olker. All rights reserved.
-//
+//  responsible for initiating web service requests
 
 import UIKit
 import CoreData
 
+//represents the result of downloading the image (follows same pattern as PhotoResult)
 enum ImageResult {
     case success(UIImage)
     case failure(Error)
 }
 
+//represents an error to represent photo errors
 enum PhotoError: Error {
     case imageCreationError
 }
 
+//if data is valid JSON and contains photos, photos will associate with the success case
+//any errors during the parsing process with pass an error with the failure case
 enum PhotosResult {
     case success([Photo])
     case failure(Error)
@@ -42,17 +46,28 @@ class PhotoStore {
         return container
     }()
     
+    //holds onto an instance of URLSession
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
     
+    //creates a URLrequest that connects to api.flickr.com and asks for the list of interesting photos
+    //then creates a URLSessionDataTask that transfers the request to the server
     func fetchInterestingPhotos(completion: @escaping (PhotosResult) -> Void) {
         
         let url = FlickrAPI.interestingPhotosURL
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) {
             (data, resposne, error) -> Void in
+            
+            //Code for Bronze Challenge: Printing the Response Information
+            if let httpStatus = response as? HTTPURLResponse {
+                //check for http errors
+                print("fetchInterestingPhotos")
+                print("statusCode is \(httpStatus.allHeaderFields)")
+                print("Header fields are \(httpStatus.allHeaderFields)")
+            }
             
             self.processPhotosRequest(data: data, error: error) {
                 (result) in
@@ -65,6 +80,7 @@ class PhotoStore {
         task.resume()
     }
     
+    //downloads the image data
     func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
         
         let photoKey = photo.photoID
@@ -81,6 +97,14 @@ class PhotoStore {
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
             
+            //Code for Bronze Challenge: Printing the Response Information
+            if let httpStatus = response as? HTTPURLResponse {
+                //check for http errors
+                print("fetchImage:")
+                print("statusCode: \(httpStatus.statusCode)")
+                print("Header fields: \(httpStatus.allHeaderFields)")
+            }
+            
             let result = self.processImageRequest(data: data, error: error)
             
             if case let .success(image) = result {
@@ -94,6 +118,7 @@ class PhotoStore {
         task.resume()
     }
     
+    //processes the data from the web service request into an image, if possible
     private func processImageRequest(data: Data?, error: Error?) -> ImageResult {
         guard
             let imageData = data,
@@ -108,6 +133,7 @@ class PhotoStore {
         return .success(image)
     }
     
+    //processes JSON data that is returned from the web service request
     private func processPhotosRequest(data: Data?, error: Error?, completion: @escaping (PhotosResult) -> Void) {
         guard let jsonData = data else {
             completion(.failure(error!))

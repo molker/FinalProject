@@ -4,7 +4,7 @@
 //
 //  Created by Matthew Olker on 4/26/17.
 //  Copyright © 2017 Matthew Olker. All rights reserved.
-//
+//  sets up the UI for Photorama
 
 import UIKit
 
