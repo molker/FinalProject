@@ -64,7 +64,7 @@ class PhotoStore {
             (data, resposne, error) -> Void in
             
             //Code for Bronze Challenge: Printing the Response Information
-            if let httpStatus = response as? HTTPURLResponse {
+            if let httpStatus = resposne as? HTTPURLResponse {
                 //check for http errors
                 print("fetchInterestingPhotos")
                 print("statusCode is \(httpStatus.allHeaderFields)")
@@ -87,7 +87,7 @@ class PhotoStore {
     func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
         
         let photoKey = photo.photoID
-        if let image = imageStore.image(forKey: photoKey) {
+        if let image = imageStore.image(forKey: photoKey! ) {
             OperationQueue.main.addOperation {
                 completion(.success(image))
             }
@@ -95,7 +95,7 @@ class PhotoStore {
         }
         
         let photoURL = photo.remoteURL
-        let request = URLRequest(url: photoURL)
+        let request = URLRequest(url: photoURL as! URL)
         
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
@@ -111,7 +111,7 @@ class PhotoStore {
             let result = self.processImageRequest(data: data, error: error)
             
             if case let .success(image) = result {
-                self.imageStore.setImage(image, forKey: photoKey)
+                self.imageStore.setImage(image, forKey: photoKey!)
             }
             
             OperationQueue.main.addOperation {
