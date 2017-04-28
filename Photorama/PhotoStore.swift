@@ -27,6 +27,7 @@ enum PhotosResult {
     case failure(Error)
 }
 
+//result type for when fetching tags
 enum TagsResult {
     case success([Tag])
     case failure(Error)
@@ -185,6 +186,7 @@ class PhotoStore {
         }
     }
     
+    //fetches all the tags from the view context
     func fetchAllTags(completion: @escaping (TagsResult) -> Void) {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
         let sortByName = NSSortDescriptor(key: #keyPath(Tag.name), ascending: true)

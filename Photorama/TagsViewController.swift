@@ -4,7 +4,7 @@
 //
 //  Created by Matthew Olker on 4/27/17.
 //  Copyright © 2017 Matthew Olker. All rights reserved.
-//
+//  displays a list of all tags. user will be able to select the tags that are associated with a specific photo
 
 import UIKit
 import CoreData
@@ -14,6 +14,7 @@ class TagsViewController: UITableViewController {
     var store: PhotoStore!
     var photo: Photo!
     
+    //keeps track of currently selected tags
     var selectedIndexPaths = [IndexPath]()
     
     let tagDataSource = TagDataSource()
@@ -22,6 +23,7 @@ class TagsViewController: UITableViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+    //adds a new tag to the selected tags for use with the button 
     @IBAction func addNewTag(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Add Tag", message: nil, preferredStyle: .alert)
         
@@ -56,6 +58,7 @@ class TagsViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    //sets the datasource and delegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,6 +68,7 @@ class TagsViewController: UITableViewController {
         updateTags()
     }
     
+    //fetches tags and associates them with the tags property on the data source and adds index paths to the selectedIndexPaths array
     func updateTags() {
         store.fetchAllTags {
             (tagsResult) in
@@ -91,6 +95,7 @@ class TagsViewController: UITableViewController {
         }
     }
     
+    //handles selected pictures
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let tag = tagDataSource.tags[indexPath.row]
@@ -112,6 +117,7 @@ class TagsViewController: UITableViewController {
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
+    //displays checkmarks
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if selectedIndexPaths.index(of: indexPath) != nil {
