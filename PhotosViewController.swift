@@ -4,7 +4,7 @@
 //
 //  Created by Matthew Olker on 4/19/17.
 //  Copyright © 2017 Matthew Olker. All rights reserved.
-//
+//  sets up the UI for photorama
 
 import UIKit
 
@@ -13,12 +13,15 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
     @IBOutlet var collectionView: UICollectionView!
     
     var store: PhotoStore!
+    //adds a property to reference an instance of photodatasource
     let photoDataSource = PhotoDataSource()
     
     //kicks off the web service exchange when the view controller comes onscreen for the first time
+    //updates the data source object and reloads the collection view
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //sets the data source on the collection view
         collectionView.dataSource = photoDataSource
         collectionView.delegate = self
         
@@ -31,6 +34,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
+    //required so PhotosViewController can be a UICollectionView delegate
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         let photo = photoDataSource.photos[indexPath.row]
@@ -83,4 +87,20 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
+}
+
+//code for Silver Challenge: Updated Item Sizes
+extension PhotosViewController: UICollectionViewDelegateFlowLayout {
+    //changes the size of the cells so there will be 4 items per row
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let collectionViewWidth = collectionView.bounds.size.width
+        let numberOfItemsPerRow: CGFloat = 4
+        let itemWidth = collectionViewWidth / numberOfItemsPerRow
+        
+        return CGSize(width: itemWidth, height: itemWidth)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.reloadData()
+    }
 }

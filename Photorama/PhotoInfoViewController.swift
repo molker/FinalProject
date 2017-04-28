@@ -4,7 +4,7 @@
 //
 //  Created by Matthew Olker on 4/26/17.
 //  Copyright © 2017 Matthew Olker. All rights reserved.
-//  sets up the UI for Photorama
+//  sets up the UI for viewing a single photo
 
 import UIKit
 
@@ -12,6 +12,7 @@ class PhotoInfoViewController: UIViewController {
     
     @IBOutlet var imageView: UIImageView!
     
+    //holds the photo and sets the title
     var photo: Photo! {
         didSet {
             navigationItem.title = photo.title
@@ -19,6 +20,7 @@ class PhotoInfoViewController: UIViewController {
     }
     var store: PhotoStore!
     
+    //sets the image when the view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +34,7 @@ class PhotoInfoViewController: UIViewController {
         }
     }
     
+    //passes along the photo and the store during the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showTags"?:

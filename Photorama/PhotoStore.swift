@@ -80,7 +80,7 @@ class PhotoStore {
         task.resume()
     }
     
-    //downloads the image data
+    //downloads the image data an dsaves the images using the imageStore
     func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
         
         let photoKey = photo.photoID
