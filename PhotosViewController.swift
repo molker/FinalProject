@@ -73,6 +73,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
+    //updates teh data source with all of the photos
     private func updateDataSource() {
         store.fetchAllPhotos {
             (photosResult) in

@@ -36,6 +36,7 @@ class PhotoStore {
     
     let imageStore = ImageStore()
     
+    //holds on to an instance of NSPersistentContainer
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Photorama")
         container.loadPersistentStores { (description, error) in
@@ -69,6 +70,7 @@ class PhotoStore {
                 print("Header fields are \(httpStatus.allHeaderFields)")
             }
             
+            //saves changes to context after photo entities have been inserted into the context
             self.processPhotosRequest(data: data, error: error) {
                 (result) in
                 
@@ -166,6 +168,7 @@ class PhotoStore {
         }
     }
     
+    //fetches photo instances from the view context
     func fetchAllPhotos(completion: @escaping (PhotosResult) -> Void) {
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
         let sortByDateTaken = NSSortDescriptor(key: #keyPath(Photo.dateTaken), ascending: true)
@@ -195,6 +198,15 @@ class PhotoStore {
             } catch {
                 completion(.failure(error))
             }
+        }
+    }
+    
+    //code for Bronze Challenge: Photo View Count
+    func saveContextIfNeeded() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            print("Save context")
+            try? context.save()
         }
     }
 

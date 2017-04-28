@@ -19,6 +19,7 @@ class PhotoInfoViewController: UIViewController {
         }
     }
     var store: PhotoStore!
+    @IBOutlet var viewLabel: UILabel!
     
     //sets the image when the view is loaded
     override func viewDidLoad() {
@@ -32,6 +33,14 @@ class PhotoInfoViewController: UIViewController {
                     print("Error fetching image for photo: \(error)")
             }
         }
+        
+        //code for Bronze Challenge: Photo View Count
+        photo.viewCount += 1
+        store.saveContextIfNeeded()
+        
+        viewLabel.text = "\(photo.viewCount) number of views"
+        viewLabel.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     //passes along the photo and the store during the segue

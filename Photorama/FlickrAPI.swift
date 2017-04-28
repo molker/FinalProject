@@ -47,6 +47,7 @@ struct FlickrAPI {
                 return nil
         }
         
+        //checks whether or not there is an existing photo with the given ID
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
         let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(photoID)")
         fetchRequest.predicate = predicate
@@ -66,6 +67,8 @@ struct FlickrAPI {
             photo.photoID = photoID
             photo.remoteURL = url as NSURL
             photo.dateTaken = dateTaken as NSDate
+            //code for Bronze Challenge: Photo View Count
+            photo.viewCount = 0
         }
         
         return photo
