@@ -211,23 +211,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Photorama" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGx-dW-QDJ">
-                                <rect key="frame" x="121" y="181" width="132.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photorama" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGx-dW-QDJ">
+                                <rect key="frame" x="121" y="181" width="133" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ysy-Ur-flS"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.66971822267371939" green="0.66885996900349365" blue="0.68385152284263961" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Develoepr: Matthew Olker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7K-Kl-Fpp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Develoepr: Matthew Olker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7K-Kl-Fpp">
                                 <rect key="frame" x="160" y="626" width="199" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.75701935279187815" green="0.75701935279187815" blue="0.75701935279187815" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE2-oO-H8k">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE2-oO-H8k">
                                 <rect key="frame" x="151" y="473" width="73" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.68025993570421728" green="0.66816418219614371" blue="0.68075824873096447" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
                                 <state key="normal" title="Go To App">
@@ -241,7 +242,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="pGx-dW-QDJ" firstAttribute="top" secondItem="u3I-Nz-iI3" secondAttribute="bottom" constant="161" id="QHv-iR-8J0"/>
+                            <constraint firstAttribute="bottom" secondItem="hE2-oO-H8k" secondAttribute="bottom" constant="164" id="RLn-Nh-Vgm"/>
+                            <constraint firstItem="y7K-Kl-Fpp" firstAttribute="trailing" secondItem="8g5-gq-6lM" secondAttribute="trailingMargin" id="ZI9-cC-ivZ"/>
                             <constraint firstItem="pGx-dW-QDJ" firstAttribute="centerX" secondItem="8g5-gq-6lM" secondAttribute="centerX" id="frY-zB-2LN"/>
+                            <constraint firstItem="pGx-dW-QDJ" firstAttribute="centerX" secondItem="hE2-oO-H8k" secondAttribute="centerX" id="nMe-uM-vGH"/>
+                            <constraint firstAttribute="bottom" secondItem="y7K-Kl-Fpp" secondAttribute="bottom" constant="20" symbolic="YES" id="p8g-7O-6Rk"/>
                         </constraints>
                     </view>
                 </viewController>
