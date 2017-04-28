@@ -10,6 +10,7 @@ import UIKit
 
 class LaunchViewController: UIViewController {
     
+    @IBOutlet var segueButton: UIButton!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "launchPhoto"?:
@@ -23,5 +24,13 @@ class LaunchViewController: UIViewController {
             preconditionFailure("Unexpected segue identifier.")
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        segueButton.layer.cornerRadius = 5
+    }
+    
+    
     
 }
